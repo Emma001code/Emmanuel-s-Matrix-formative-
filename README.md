@@ -10,7 +10,7 @@ This program performs operations on sparse matrices (addition, subtraction, and 
   - Subtraction
   - Multiplication
 - Save results to files in a 'results' directory
-- Interactive menu system with option to quit
+
 
 ## File Format
 
@@ -28,9 +28,9 @@ cols=<number_of_columns>
    - 1: Add matrices
    - 2: Subtract matrices
    - 3: Multiply matrices
-   - q: Quit the program
+   
 3. Enter paths to the two matrix files when prompted
-4. copy the relative path of the samplr input file you want to use
+4. copy the relative path of the sample input file you want to use
 5. Results will be saved in the 'results' directory as well as the result of the previously ran results
 6. After each operation, you'll be asked if you want to perform another operation
 7. View the generated output from the previously ran code in the Result folder 
