@@ -33,11 +33,12 @@ cols=<number_of_columns>
 4. copy the relative path of the samplr input file you want to use
 5. Results will be saved in the 'results' directory as well as the result of the previously ran results
 6. After each operation, you'll be asked if you want to perform another operation
-
+7. View the generated output from the previously ran code in the Result folder 
 ## Requirements
 
-- Python 3.x
+- Python 3
 - No external dependencies required
+- Run with Python3 if you are using ubuntu
 
 ## Notes
 
