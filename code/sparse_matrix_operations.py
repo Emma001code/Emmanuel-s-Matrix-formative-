@@ -189,7 +189,7 @@ def execute_matrix_operations():
 
         # Ask if user wants to continue
         if not get_continue_choice():
-            print("\nExiting program. Goodbye dear!")
+            print("\nExiting program. Goodbye mydear!")
             return
 
 if __name__ == "__main__":
