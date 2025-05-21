@@ -1,5 +1,5 @@
 class SparseMatrix:
-    def _init_(self, file_source='', rows=0, cols=0):
+    def __init__(self, file_source='', rows=0, cols=0):
         self.non_zero_entries = {} # stores values that are not zero
         self.matrix_rows = rows
         self.matrix_cols = cols
@@ -165,15 +165,15 @@ def execute_matrix_operations():
             # Perform requested operation
             if operation == '1':
                 result_matrix = matrix_one.sparse_matrix_addition(matrix_two)
-                output_filename = f'{path.basename(file_1).split(".")[0]}plus{path.basename(file_2).split(".")[0]}.txt'
+                output_filename = f'{path.basename(file_1).split(".")[0]}_plus_{path.basename(file_2).split(".")[0]}.txt'
 
             elif operation == '2':
                 result_matrix = matrix_one.sparse_matix_sub(matrix_two)
-                output_filename = f'{path.basename(file_1).split(".")[0]}minus{path.basename(file_2).split(".")[0]}.txt'
+                output_filename = f'{path.basename(file_1).split(".")[0]}_minus_{path.basename(file_2).split(".")[0]}.txt'
 
             else:  # Multiplication
                 result_matrix = matrix_one.sparse_matrix_multiplication(matrix_two)
-                output_filename = f'Product_{path.basename(file_1).split(".")[0]}times{path.basename(file_2).split(".")[0]}.txt'
+                output_filename = f'Product_{path.basename(file_1).split(".")[0]}_times_{path.basename(file_2).split(".")[0]}.txt'
 
             # Save results
             output_path = path.join(results_dir, output_filename)
@@ -192,7 +192,7 @@ def execute_matrix_operations():
             print("\nExiting program. Goodbye dear!")
             return
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     print("Sparse Matrix Operations Program")
     print("--------------------------------")
     execute_matrix_operations()
