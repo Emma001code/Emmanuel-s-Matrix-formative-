@@ -1,6 +1,5 @@
 class SparseMatrix:
     def __init__(self, file_source='', rows=0, cols=0):
-
         self.non_zero_entries = {} # stores values that are not zero
         self.matrix_rows = rows
         self.matrix_cols = cols
@@ -126,61 +125,76 @@ def get_operation_choice():
     print("1. Add Matrices")
     print("2. Subtract Matrices")
     print("3. Multiply Matrices")
+    print("q. Quit")
 
-    choice = input("\nSelect operation (1-3): ").strip()
+    while True:
+        choice = input("\nSelect operation (1-3 or press q to quit): ").strip().lower()
+        if choice in {'1', '2', '3', 'q'}:
+            return choice
+        print("Invalid selection. Please try again.")
 
-    if choice not in {'1', '2', '3'}:
-        print("Invalid selection. Exiting program.")
-        return None
-
-    return choice
+def get_continue_choice():
+    """Ask user if they want to perform another operation"""
+    while True:
+        choice = input("\nWould you like to perform another operation? click y for yes and n for No (y/n): ").strip().lower()
+        if choice in {'y', 'n'}:
+            return choice == 'y'
+        print("Invalid input. Please enter 'y' or 'n'.")
 
 def execute_matrix_operations():
-    # Get user's operation choice
-    operation = get_operation_choice()
-    if not operation:
-        return
+    while True:
+        # Get user's operation choice
+        operation = get_operation_choice()
+        if operation == 'q':
+            print("\nExiting program. Goodbye dear!")
+            return
 
-    # Get input file information
-    file_1 = input("Enter path to first matrix file: ").strip()
-    file_2 = input("Enter path to second matrix file: ").strip()
+        # Get input file information
+        file_1 = input("Enter path to first matrix file: ").strip()
+        file_2 = input("Enter path to second matrix file: ").strip()
 
-    try:
-        # Load matrix data
-        matrix_one = SparseMatrix(file_source=file_1)
-        matrix_two = SparseMatrix(file_source=file_2)
+        try:
+            # Load matrix data
+            matrix_one = SparseMatrix(file_source=file_1)
+            matrix_two = SparseMatrix(file_source=file_2)
 
-        # Set up output directory
-        results_dir = 'results'
-        makedirs(results_dir, exist_ok=True)
+            # Set up output directory
+            results_dir = 'results'
+            makedirs(results_dir, exist_ok=True)
 
-        # Perform requested operation
-        if operation == '1':
-            result_matrix = matrix_one.sparse_matrix_addition(matrix_two)
-            output_filename = f'{path.basename(file_1).split(".")[0]}_plus_{path.basename(file_2).split(".")[0]}.txt'
+            # Perform requested operation
+            if operation == '1':
+                result_matrix = matrix_one.sparse_matrix_addition(matrix_two)
+                output_filename = f'{path.basename(file_1).split(".")[0]}_plus_{path.basename(file_2).split(".")[0]}.txt'
 
-        elif operation == '2':
-            result_matrix = matrix_one.sparse_matix_sub(matrix_two)
-            output_filename = f'{path.basename(file_1).split(".")[0]}_minus_{path.basename(file_2).split(".")[0]}.txt'
+            elif operation == '2':
+                result_matrix = matrix_one.sparse_matix_sub(matrix_two)
+                output_filename = f'{path.basename(file_1).split(".")[0]}_minus_{path.basename(file_2).split(".")[0]}.txt'
 
-        else:  # Multiplication
-            result_matrix = matrix_one.sparse_matrix_multiplication(matrix_two)
-            output_filename = f'Product_{path.basename(file_1).split(".")[0]}_times_{path.basename(file_2).split(".")[0]}.txt'
+            else:  # Multiplication
+                result_matrix = matrix_one.sparse_matrix_multiplication(matrix_two)
+                output_filename = f'Product_{path.basename(file_1).split(".")[0]}_times_{path.basename(file_2).split(".")[0]}.txt'
 
-        # Save results
-        output_path = path.join(results_dir, output_filename)
-        result_matrix.export_to_file(output_path)
-        print(f"\nOperation completed successfully. Result saved to: {output_path}")
+            # Save results
+            output_path = path.join(results_dir, output_filename)
+            result_matrix.export_to_file(output_path)
+            print(f"\nOperation completed successfully. Result saved to: {output_path}")
 
-    except ValueError as err:
-        print(f"Matrix error: {err}")
-    except FileNotFoundError:
-        print("Error: Specified file(s) not found.")
-    except Exception as err:
-        print(f"Operation failed: {err}")
+        except ValueError as err:
+            print(f"Matrix error: {err}")
+        except FileNotFoundError:
+            print("Error: Specified file(s) not found.")
+        except Exception as err:
+            print(f"Operation failed: {err}")
+
+        # Ask if user wants to continue
+        if not get_continue_choice():
+            print("\nExiting program. Goodbye!")
+            return
 
 if __name__ == "__main__":
+    print("Sparse Matrix Operations Program")
+    print("--------------------------------")
     execute_matrix_operations()
-
 
 
